@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/gradle_project?serverTimezone=UTC
+    username: root
+    password: dbfrhrfh1rk!
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect  #거의 다 이걸 쓴다  dialect는 방언 JPA는 특정 데이터베이스에 종속적이지 않기 때문에 SQL문법과 함수가 조금씩 달라서 (EX. ORACLE)
+    #H2 : org.hibernate.dialect.H2Dialect
+    #Orcle 10g : org.hibernate.dialect.Oracle10gDialect
+    #MySQL : org.hibernate.dialect.MySQL5lnnoDBDialect
+    properties:
+      hibernate:
+#       ddl-auto: update #DDL : CRATE, DROP, ALTER, TRUNCATE     #DML : SELECT, INSERT, UPATE, DELETE  #서버 시작 지점에 DDL문을 생성하여 DB에 적용한다.
+       show_sql: true
+       format_sql: true
+       ddl_sql: true
+    generate-ddl: false 
+    show-sql: true #hibernate sql 문 보여주는 옵션
+    hibernate:
+      ddl-auto: create #none 테이블을 자동으로 생성하지 않습니다.
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl   #대소문자 입력한 그대로 ddl
+  data:
+    mongodb:
+      host: 192.168.1.235
+      port: 27017
+      authentication-database: admin
+      database: telecomService
+      username: admin
+      password: dbfrhrfh1rk!
+      repositories:
+        type: auto
+  batch:
+    initialize-schema: ALWAYS
+#  batch:
+    job:
+      names: ${job.name:NONE}
+
+logging:
+  level:
+    org.springframework.web.client: DEBUG
+    org.hibernate.type : trace
+    org:
+      springframework:
+        batch: DEBUG
